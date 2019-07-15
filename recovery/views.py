@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Athlet, Article
-from .forms import PostForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 #import datetime
 from django.utils import timezone
