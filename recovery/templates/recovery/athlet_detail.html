@@ -1,0 +1,52 @@
+{% extends 'recovery/base.html' %}
+{% load embed_video_tags %}
+{% block content %}
+<div class="row">
+  <div class="media">
+    <img class="w-50 img-fluid img-thumbnail" src="{{athlet.image.url}}">
+      <table class="w-50 table float-right">
+        <thead>
+          <tr>
+            <th colspan="2" class="table-active">{{athlet.name}} {{athlet.surname}} ({{athlet.date_of_birth}}-{{athlet.date_of_dearth}})</th>
+          </tr>
+        </thead>
+          <tbody>
+            <tr>
+              <th scope="row">E-mail:</th>
+              <td><a href="mailto:{{athlet.e_mail}}">{{athlet.e_mail}}</a></td>
+            </tr>
+            <tr>
+              <th scope="row">Web site:</th>
+              <td><a href="{{athlet.web_site}}">{{athlet.web_site}}</a></td>
+            </tr>
+            <tr>
+              <th scope="row">Страна:</th>
+              <td>{{athlet.country}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Вид деятельности:</th>
+              <td>{{athlet.sport}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Диагноз:</th>
+              <td>{{athlet.diagnosis}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Операция:</th>
+              <td>{{athlet.surgery}}, {{athlet.date_of_surgery}}</td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <p>{{athlet.text|linebreaksbr}}</p>
+  </div>
+  <div class="row justify-content-center mb-4">
+    {% video athlet.video 'medium' %}
+  </div>
+<div class="row">
+
+</div>
+{% endblock %}

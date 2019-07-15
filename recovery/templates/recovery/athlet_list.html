@@ -1,0 +1,56 @@
+{% extends 'recovery/base.html' %}
+
+{% block content %}
+  {% for athlet in athlets %}
+<div class="row mb-3">
+  <img class="w-50" src="{{athlet.image.url}}">
+    <table class="w-50 table float-right">
+      <thead>
+        <tr>
+          <th scope="col" class="table-active"><a href="{% url 'athlet_detail' pk=athlet.pk %}">{{athlet.name}} {{athlet.surname}}</a></th>
+        </tr>
+      </thead>
+        <tbody>
+          <tr>
+            <td>{{athlet.description}}<a href="{% url 'athlet_detail' pk=athlet.pk %}"><br>Узнать историю -></a></td>
+          </tr>
+        </tbody>
+    </table>
+</div>
+  {% endfor %}
+
+  {% if athlets.has_other_pages %}
+  <nav area_lable="Page navigation">
+    <ul class="pagination justify-content-center mb-4">
+      {%if users.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ athlets.previous_page_number}}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+      {% else %}
+      <li class="page-item"><a class="page-link" href="#" ><span>&laquo;</span></a></li>
+      {% endif %}
+      {%for i in athlets.paginator.page_range %}
+        {% if athlets.number == i %}
+          <li class="page-item"><a class="page-link" href="#" >{{ i }}</a></li>
+        {% else %}
+          <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if athlets.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ athlets.next_page_number }}" area-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      {% else %}
+        <li class="page-item disabled"><a class="page-link" href="#"><span>&raquo;</span></a></li>
+      {% endif %}
+    </ul>
+  {% endif %}
+</nav>
+
+{% endblock %}
