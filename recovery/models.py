@@ -42,6 +42,7 @@ class Athlet(models.Model):
     surname = models.CharField(max_length=350)
     image = models.ImageField(upload_to='images/')
     web_site = models.CharField(max_length=500, blank=True)
+    web_site_name = models.CharField(max_length=150, blank=True)
     e_mail = models.EmailField(max_length=254, blank=True)
     date_of_birth = models.IntegerField(blank=True, null=True)
     date_of_dearth = models.IntegerField(blank=True, null=True)
@@ -58,10 +59,12 @@ class Athlet(models.Model):
     def __str__(self):
         return self.name + ' ' + self.surname
 
+    @property
     def date(self):
         if self.date_of_dearth == None:
-            self.date_of_dearth = "настоящее время"
-        return self.date_of_dearth
+            return 'настоящее время'
+        else:
+            return self.date_of_dearth
 
     class Meta:
         ordering = ['surname']

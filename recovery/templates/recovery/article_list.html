@@ -2,4 +2,17 @@
 
 {% block content %}
 
+  {% for article in articles %}
+    <div class="row mb-3">
+      <img class="w-25" src="{{article.image.url}}">
+        <div class="post w-50 float-right ml-3">
+          <h1><a href="{% url 'article_detail' pk=article.pk %}">{{ article.title }}</a></h1>
+          <p>{{ article.text|linebreaksbr }}</p>
+          <div class="date">
+            <p>Опубликовано: {{ article.published_at }}</p>
+          </div>
+        </div>
+      </div>
+  {% endfor %}
+
 {% endblock %}

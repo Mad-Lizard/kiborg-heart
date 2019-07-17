@@ -11,6 +11,10 @@ html, body{
     padding:0px;
 }
 
+img{
+  width: 250px;
+  height: auto;
+}
 .page-header {
     background-color: #ff9400;
     margin-top: 0;

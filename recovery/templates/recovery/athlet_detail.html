@@ -3,30 +3,48 @@
 {% block content %}
 <div class="row">
   <div class="media">
+    {{context}}
     <img class="w-50 img-fluid img-thumbnail" src="{{athlet.image.url}}">
       <table class="w-50 table float-right">
         <thead>
           <tr>
-            <th colspan="2" class="table-active">{{athlet.name}} {{athlet.surname}} ({{athlet.date_of_birth}}-{{athlet.date_of_dearth}})</th>
+            <th colspan="2" class="table-active">
+              {{athlet.name}} {{athlet.surname}}
+              ({{athlet.date_of_birth}}-{{athlet.date}})
+            </th>
           </tr>
         </thead>
           <tbody>
+            {% if athlet.e_mail %}
             <tr>
               <th scope="row">E-mail:</th>
               <td><a href="mailto:{{athlet.e_mail}}">{{athlet.e_mail}}</a></td>
             </tr>
+            {% endif %}
+            {% if athlet.web_site %}
             <tr>
               <th scope="row">Web site:</th>
-              <td><a href="{{athlet.web_site}}">{{athlet.web_site}}</a></td>
+              <td><a href="{{athlet.web_site}}" target="_blank">
+                {% if athlet.web_site_name %}
+                  {{athlet.web_site_name}}
+                {% else %}
+                  {{athlet.web_site}}
+                {% endif %}
+              </a></td>
             </tr>
+            {% endif %}
+            {% if athlet.country %}
             <tr>
               <th scope="row">Страна:</th>
-              <td>{{athlet.country}}</td>
+              <td>{{athlet.country.name}}</td>
             </tr>
+            {% endif %}
+            {% if athlet.sport %}
             <tr>
               <th scope="row">Вид деятельности:</th>
               <td>{{athlet.sport}}</td>
             </tr>
+            {% endif %}
             <tr>
               <th scope="row">Диагноз:</th>
               <td>{{athlet.diagnosis}}</td>

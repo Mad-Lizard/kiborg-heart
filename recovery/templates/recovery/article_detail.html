@@ -2,4 +2,17 @@
 
 {% block content %}
 
+<div class="row mb-3">
+  <img class="w-25 float-left mr-3" src="{{article.image.url}}">
+    <div class="post">
+        <h1>{{ article.title }}</h1>
+        {% if article.published_at %}
+            <div class="date">
+                {{ article.published_at }}
+            </div>
+        {% endif %}
+        <p>{{ article.text|linebreaksbr }}</p>
+    </div>
+</div>
+
 {% endblock %}

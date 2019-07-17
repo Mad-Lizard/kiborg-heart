@@ -1,13 +1,18 @@
 {% extends 'recovery/base.html' %}
 
 {% block content %}
+
+<div class="row mb-3">
+  <img class="w-25 float-left mr-3" src="{{post.image.url}}">
     <div class="post">
+        <h1>{{ post.title }}</h1>
         {% if post.published_at %}
             <div class="date">
                 {{ post.published_at }}
             </div>
         {% endif %}
-        <h1>{{ post.title }}</h1>
         <p>{{ post.text|linebreaksbr }}</p>
     </div>
+</div>
+
 {% endblock %}
