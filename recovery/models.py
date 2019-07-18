@@ -33,6 +33,7 @@ class PostableMixin(models.Model):
 
 class Article(PostableMixin):
     link = models.CharField(max_length=500, blank=True)
+    link_name = models.CharField(max_length=150, blank=True)
 
 class Post(PostableMixin):
     mood = models.CharField(max_length=500, blank=True, null=True)

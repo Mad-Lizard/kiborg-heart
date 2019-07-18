@@ -12,6 +12,11 @@
             </div>
         {% endif %}
         <p>{{ article.text|linebreaksbr }}</p>
+        <div class="link">
+          <p>Источник: 
+          <a href="{{article.link}}" target="_blank">{{article.link_name}}</a>
+          </p>
+        </div>
     </div>
 </div>
 
