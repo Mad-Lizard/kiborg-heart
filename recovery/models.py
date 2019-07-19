@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 from django_countries.fields import CountryField
 from embed_video.fields import EmbedVideoField
+from sorl.thumbnail import ImageField
 
 # Model for dairy Post
     #title

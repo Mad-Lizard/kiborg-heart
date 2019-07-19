@@ -1,17 +1,42 @@
 {% extends 'recovery/base.html' %}
+{% load thumbnail %}
 
 {% block content %}
 
   {% for post in posts %}
   <div class="row mb-3">
-    <img class="w-25" src="{{article.image.url}}">
-      <div class="post w-50 float-right ml-3">
-        <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-        <p>{{ post.text|linebreaksbr }}</p>
-        <div class="date">
-          <p>Опубликовано: {{ post.published_at }}</p>
-        </div>
-      </div>
+    {% if post.image %}
+      {% thumbnail post.image "200x200" crop="center" as im %}
+        <img class="mr-3" src="{{im.url}}" width="{{im.width}}" height="{{im.height}}">
+      {% endthumbnail %}
+    {% else %}
+      {% thumbnail "https://ak0.picdn.net/shutterstock/videos/1007436310/thumb/8.jpg" "200x200" crop="center" as im %}
+        <img class="mr-3" src="{{im.url}}">
+      {% endthumbnail %}
+    {% endif %}
+    <table class="w-75 table-borderless table float-right">
+      <thead>
+        <tr>
+          <th scope="col" class="table-light">
+            <h1>
+            <a class="title" href="{% url 'post_detail' pk=post.pk %}">
+              {{post.title}}
+            </a>
+            </h1>
+          </th>
+        </tr>
+      </thead>
+        <tbody>
+          <tr>
+            <td>
+              {{post.description}}
+              <a href="{% url 'post_detail' pk=post.pk %}">
+                </br>Узнать историю ->
+              </a>
+            </td>
+          </tr>
+        </tbody>
+    </table>
     </div>
   {% endfor %}
 

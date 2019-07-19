@@ -24,6 +24,7 @@ SECRET_KEY = '6f91kg!ct7+##hbc6zt=2$u$%=@6&t3j@yd7-&1u@bz#lrd)b4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+THUMBNAIL_DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django_countries',
     'embed_video',
     'django_mysql',
+    'sorl.thumbnail',
     'recovery',
 ]
 

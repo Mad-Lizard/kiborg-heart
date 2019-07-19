@@ -3,7 +3,6 @@
 {% block content %}
 
 <div class="row mb-3">
-  <img class="w-25 float-left mr-3" src="{{article.image.url}}">
     <div class="post">
         <h1>{{ article.title }}</h1>
         {% if article.published_at %}
@@ -11,13 +10,15 @@
                 {{ article.published_at }}
             </div>
         {% endif %}
+        <br>
+        <img class="w-50 float-right mr-3" src="{{article.image.url}}">
         <p>{{ article.text|linebreaksbr }}</p>
         <div class="link">
-          <p>Источник: 
+          <p>Источник:
           <a href="{{article.link}}" target="_blank">{{article.link_name}}</a>
           </p>
         </div>
-    </div>
+      </div>
 </div>
 
 {% endblock %}

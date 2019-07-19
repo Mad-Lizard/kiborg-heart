@@ -1,18 +1,33 @@
 {% extends 'recovery/base.html' %}
+{% load thumbnail %}
 
 {% block content %}
   {% for athlet in athlets %}
 <div class="row mb-3">
-  <img class="w-25" src="{{athlet.image.url}}">
-    <table class="w-50 table float-right">
+  {% thumbnail athlet.image "200x200" crop="center" as im %}
+  <img class="mr-3" src="{{im.url}}" width="{{im.width}}" height="{{im.height}}">
+  {% empty %}
+    <<p>Нет изображения</p>
+  {% endthumbnail %}
+    <table class="w-75 table float-right">
       <thead>
         <tr>
-          <th scope="col" class="table-active"><a href="{% url 'athlet_detail' pk=athlet.pk %}">{{athlet.name}} {{athlet.surname}}</a></th>
+          <th scope="col" class="table-active">
+            <a href="{% url 'athlet_detail' pk=athlet.pk %}">
+              {{athlet.name}} {{athlet.surname}}
+            </a>
+          </th>
         </tr>
       </thead>
         <tbody>
           <tr>
-            <td>{{athlet.description}}<a href="{% url 'athlet_detail' pk=athlet.pk %}"><br>Узнать историю -></a></td>
+            <td>
+              {{athlet.description}}
+              <a href="{% url 'athlet_detail' pk=athlet.pk %}">
+                <br>
+                Узнать историю ->
+              </a>
+            </td>
           </tr>
         </tbody>
     </table>

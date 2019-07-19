@@ -23,7 +23,7 @@ class AthletDetailView(generic.DetailView):
 
 class ArticleListView(generic.ListView):
     model = Article
-    paginate_by = 10
+    paginate_by = 2
     context_object_name = 'articles'
     queryset = Article.objects.filter(published_at__lte=timezone.now())
 
