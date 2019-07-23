@@ -1,6 +1,7 @@
 from .models import Post, Athlet, Article
 from django.utils import timezone
-from django.views import generic
+from django.views import generic, View
+from django.shortcuts import render
 # Create your views here.
 
 class PostListView(generic.ListView):
@@ -29,3 +30,7 @@ class ArticleListView(generic.ListView):
 
 class ArticleDetailView (generic.DetailView):
     model = Article
+
+class AboutView(View):
+    def get(self, request):
+        return render(request, 'recovery/about.html')
