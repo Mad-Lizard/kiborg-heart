@@ -4,7 +4,7 @@
     <head>
       <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
       <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4/3/1/css/bootstrap-theme.min.css">
-      <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+      <link href="https://fonts.googleapis.com/css?family=Noto+Sans&subset=latin,cyrillic" rel="stylesheet" type="text/css">
       <link rel="stylesheet" href="{% static 'css/recovery.css' %}">
         <title>To My Heart</title>
     </head>
@@ -14,13 +14,22 @@
             <div class="navbar-brand">
               <ul class="navbar-nav">
                 <li class="nav-item active">
-                  <h1><a class="nav-link" href="{% url 'post_list' %}">My Heart <span class="sr-only"></span></a></h1>
+                  <h1>
+                    <a class="nav-link" href="{% url 'about' %}">
+                      {% thumbnail "https://picsum.photos/id/175/2896/1944" "40x40" crop="center" as im %}
+                          <img class="align-bottom d-inline-block" src="{{im.url}}" width="{{im.url.width}}" height="{{im.url.height}}">
+                      {% endthumbnail %}
+                    </a>
+                  </h1>
+                </li>
+                <li class="nav-item active">
+                  <h1><a class="nav-link" href="{% url 'post_list' %}">Блог <span class="sr-only"></span></a></h1>
                 </li>
                 <li class="nav-item">
-                  <h1><a class="nav-link" href="{% url 'athlet_list' %}">Athlets </a></h1>
+                  <h1><a class="nav-link" href="{% url 'athlet_list' %}">Атлеты </a></h1>
                 </li>
                 <li class="nav-item">
-                <h1>  <a class="nav-link" href="{% url 'article_list' %}">Research</a></h1>
+                <h1>  <a class="nav-link" href="{% url 'article_list' %}">Статьи</a></h1>
                 </li>
               </ul>
             </div>
@@ -32,20 +41,20 @@
                 <li class="nav-item active">
                   <h1>
                     <a class="nav-link" href="{% url 'about' %}">
-                      {% thumbnail "https://cdn.pixabay.com/photo/2016/11/21/14/44/heart-1845775_960_720.png" "40x40" crop="center" as im %}
+                      {% thumbnail "https://picsum.photos/id/175/2896/1944" "40x40" crop="center" as im %}
                           <img class="align-bottom d-inline-block" src="{{im.url}}" width="{{im.url.width}}" height="{{im.url.height}}">
                       {% endthumbnail %}
                     </a>
                   </h1>
                 </li>
                 <li class="nav-item active">
-                  <h1><a class="nav-link" href="{% url 'post_list' %}">My Heart <span class="sr-only"></span></a></h1>
+                  <h1><a class="nav-link" href="{% url 'post_list' %}">Блог <span class="sr-only"></span></a></h1>
                 </li>
                 <li class="nav-item">
-                  <h1><a class="nav-link" href="{% url 'athlet_list' %}">Athlets</a></h1>
+                  <h1><a class="nav-link" href="{% url 'athlet_list' %}">Атлеты</a></h1>
                 </li>
                 <li class="nav-item">
-                <h1>  <a class="nav-link" href="{% url 'article_list' %}">Research</a></h1>
+                <h1>  <a class="nav-link" href="{% url 'article_list' %}">Статьи</a></h1>
                 </li>
               </ul>
             </div>

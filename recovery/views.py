@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 class PostListView(generic.ListView):
     model = Post
-    paginate_by = 3
+    paginate_by = 10
     context_object_name = 'posts'
     queryset = Post.objects.filter(published_at__lte=timezone.now())
 
@@ -15,7 +15,7 @@ class PostDetailView(generic.DetailView):
 
 class AthletListView(generic.ListView):
     model = Athlet
-    paginate_by = 10
+    paginate_by = 5
     context_object_name = 'athlets'
     queryset = Athlet.objects.filter(published_at__lte=timezone.now())
 
@@ -24,7 +24,7 @@ class AthletDetailView(generic.DetailView):
 
 class ArticleListView(generic.ListView):
     model = Article
-    paginate_by = 2
+    paginate_by = 10
     context_object_name = 'articles'
     queryset = Article.objects.filter(published_at__lte=timezone.now())
 
