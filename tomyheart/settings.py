@@ -26,7 +26,7 @@ SECRET_KEY = '6f91kg!ct7+##hbc6zt=2$u$%=@6&t3j@yd7-&1u@bz#lrd)b4'
 DEBUG = True
 THUMBNAIL_DEBUG = True
 
-ALLOWED_HOSTS = ['tomyheart.pythonanywhere.com']
+ALLOWED_HOSTS = ['tomyheart.pythonanywhere.com', '127.0.0.1']
 
 
 # Application definition
@@ -83,11 +83,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'NAME': 'tomyheart$recovery',
-        'USER': 'tomyheart',
-        'PASSWORD': 'C1fghtkz',
-        'HOST': 'tomyheart.mysql.pythonanywhere-services.com',
-        'PORT': ''
+        'NAME': 'recovery',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
+        'PORT': '3306'
     }
 }
 
