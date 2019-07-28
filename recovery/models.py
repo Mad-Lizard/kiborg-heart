@@ -5,12 +5,6 @@ from django_countries.fields import CountryField
 from embed_video.fields import EmbedVideoField
 from sorl.thumbnail import ImageField
 
-# Model for dairy Post
-    #title
-    #description
-    #text
-    #created_at
-    #published_at
 
 class PostableMixin(models.Model):
     class Meta:
@@ -20,7 +14,7 @@ class PostableMixin(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     text = models.TextField()
-    image = models.ImageField(upload_to='images/', null=True, blank=True)
+    image = ImageField(upload_to='images/', null=True, blank=True)
     video = EmbedVideoField(blank=True, null=True)
     created_at = models.DateTimeField(default=timezone.now)
     published_at = models.DateTimeField(blank=True, null=True)
@@ -42,7 +36,7 @@ class Post(PostableMixin):
 class Athlet(models.Model):
     name = models.CharField(max_length=350)
     surname = models.CharField(max_length=350)
-    image = models.ImageField(upload_to='images/')
+    image = ImageField(upload_to='images/')
     web_site = models.CharField(max_length=500, blank=True)
     web_site_name = models.CharField(max_length=150, blank=True)
     e_mail = models.EmailField(max_length=254, blank=True)

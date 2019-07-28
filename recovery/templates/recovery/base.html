@@ -9,14 +9,14 @@
         <title>To My Heart</title>
     </head>
     <body>
-        <!-- False navbar to make responsible padding for fixed-top real navbar  -->
-          <nav class="navbar navbar-expand-lg bg-light mb-4">
+        <!-- False navbar to make responsible padding for fixed-top real navbar
+          <nav class="navbar navbar-expand-lg bg-light mb-4 justify-content-between">
             <div class="navbar-brand">
               <ul class="navbar-nav">
                 <li class="nav-item active">
                   <h1>
                     <a class="nav-link" href="{% url 'about' %}">
-                      {% thumbnail "https://picsum.photos/id/175/2896/1944" "40x40" crop="center" as im %}
+                      {% thumbnail "https://picsum.photos/id/137/4752/3168" "40x40" crop="center" as im %}
                           <img class="align-bottom d-inline-block" src="{{im.url}}" width="{{im.url.width}}" height="{{im.url.height}}">
                       {% endthumbnail %}
                     </a>
@@ -31,17 +31,22 @@
                 <li class="nav-item">
                 <h1>  <a class="nav-link" href="{% url 'article_list' %}">Статьи</a></h1>
                 </li>
+
+              <form action="{% url 'search_results' %}" method="get" class="form-inline my-2 my-lg-0 float-fight">
+                <input name-"q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Поиск</button>
+              </form>
               </ul>
             </div>
-          </nav>
+          </nav> -->
 
-          <nav class="navbar fixed-top navbar-expand-lg bg-dark">
-            <div class="navbar-brand">
-              <ul class="navbar-nav">
+          <nav class="navbar d-flex navbar-expand-lg bg-light justify-content-between">
+            <div class="collapse navbar-collapse">
+              <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                   <h1>
                     <a class="nav-link" href="{% url 'about' %}">
-                      {% thumbnail "https://picsum.photos/id/175/2896/1944" "40x40" crop="center" as im %}
+                      {% thumbnail "https://picsum.photos/id/137/4752/3168" "40x40" crop="center" as im %}
                           <img class="align-bottom d-inline-block" src="{{im.url}}" width="{{im.url.width}}" height="{{im.url.height}}">
                       {% endthumbnail %}
                     </a>
@@ -56,11 +61,16 @@
                 <li class="nav-item">
                 <h1>  <a class="nav-link" href="{% url 'article_list' %}">Статьи</a></h1>
                 </li>
-              </ul>
+            </ul>
+              <form action="{% url 'search_results' %}" method="get" class="form-inline my-2 my-lg-0">
+                <input name="q" type="text" class="form-control mr-sm-2" placeholder="Поиск..." aria-label="Search">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Поиск</button>
+              </form>
+
             </div>
           </nav>
 
-        <div class="container">
+        <div class="container mt-3">
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-10">
                     {% block content %}

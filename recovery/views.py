@@ -1,7 +1,9 @@
 from .models import Post, Athlet, Article
 from django.utils import timezone
-from django.views import generic, View
-from django.shortcuts import render
+from django.views import generic
+from django.db.models import Q
+
+
 # Create your views here.
 
 class PostListView(generic.ListView):
@@ -31,6 +33,16 @@ class ArticleListView(generic.ListView):
 class ArticleDetailView (generic.DetailView):
     model = Article
 
-class AboutView(View):
-    def get(self, request):
-        return render(request, 'recovery/about.html')
+class AboutView(generic.TemplateView):
+    template_name = 'about.html'
+
+class SearchResultsView(generic.ListView):
+    model = Athlet, Post, Article
+    template_name ='search_results.html'
+
+    def get_queryset(self):
+        query = request.GET.get('q')
+        object_list = Athlet.objects.filter(
+            Q(name__icontains=query) | Q(text__icontains=query)
+        )
+        return object_list
