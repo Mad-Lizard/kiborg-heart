@@ -13,21 +13,21 @@
       {% if klass == 'Post' %}
            <div class='row my-3'>
              <div class='col-12'>
-                Запись блога: <a href='{{ object.get_absolute_url }}'> {{ object.title }}</a>
+                Запись блога: <a href='{% url 'post_detail' pk=object.pk %}'> {{ object.title }}</a>
             </div>
           </div>
 
       {% elif klass == 'Athlet' %}
            <div class='row my-3'>
              <div class='col-12'>
-                Атлет: <a href='{{ object.get_absolute_url }}'> {{ object.name }} {{object.surname}}</a>
+                Атлет: <a href='{% url 'athlet_detail' pk=object.pk %}'> {{ object.name }} {{object.surname}}</a>
               </div>
             </div>
 
       {% elif klass == 'Article' %}
            <div class='row my-3'>
                 <div class='col-12'>
-                   Статья: <a href='{{ object.get_absolute_url }}'> {{ object.title }}</a>
+                   Статья: <a href='{% url 'article_detail' pk=object.pk %}'> {{ object.title }}</a>
                 </div>
             </div>
       {% else %}
