@@ -12,7 +12,7 @@
         {% endif %}
         <br>
         <img class="w-50 float-right ml-3" src="{{article.image.url}}">
-        <p>{{ article.text|linebreaksbr }}</p>
+        <p>{{ article.text|safe }}</p>
         <div class="link">
           <p>Источник:
           <a href="{{article.link}}" target="_blank">{{article.link_name}}</a>

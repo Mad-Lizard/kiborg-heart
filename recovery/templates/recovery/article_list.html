@@ -5,16 +5,14 @@
 
   {% for article in articles %}
     <div class="row mb-3">
-      <div>
-      {% if article.image %}
-        {% thumbnail article.image '200x200' crop='center' as im %}
-          <img class="mr-3" src="{{im.url}}" width="{{im.width}}" height="{{im.height}}">
-        {% endthumbnail %}
-      {% else %}
-        {% thumbnail "https://picsum.photos/id/136/4032/2272" "200x200" crop="center" as im %}
-          <img class="mr-3" src="{{im.url}}" width="{{im.url.width}}" height="{{im.url.height}}" >
-        {% endthumbnail %}
-      {% endif %}
+      <div class="w-25">
+        {% if article.image %}
+          <a href="{% url 'article_detail' pk=article.pk %}">
+            {% thumbnail article.image '200x200' crop='center' as im %}
+              <img class="mr-3" src="{{im.url}}" width="{{im.width}}" height="{{im.height}}">
+            {% endthumbnail %}
+          </a>
+        {% endif %}
       </div>
       <table class="w-75 table-borderless text-top float-right">
         <thead>
@@ -31,7 +29,7 @@
           <tbody>
             <tr>
               <td>
-                {{article.description|linebreaksbr}}
+                {{article.description|safe}}
                 <a href="{% url 'article_detail' pk=article.pk %}">
                   </br>Узнать историю ->
                 </a>
