@@ -82,10 +82,10 @@ WSGI_APPLICATION = 'tomyheart.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tomyheart$recovery',
-        'USER': 'tomyheart',
-        'PASSWORD': 'C1fghtkz',
-        'HOST': 'tomyheart.mysql.pythonanywhere-services.com',
+        'NAME': 'recovery',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
         'PORT': '3306'
     }
 }

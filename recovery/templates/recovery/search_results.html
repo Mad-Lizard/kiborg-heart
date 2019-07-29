@@ -1,17 +1,44 @@
 {% extends 'recovery/base.html' %}
-
+{% load class_name %}
 {% block content %}
-<div class="row">
-    <h1>Результаты поиска:</h1>
-    {{object_list}}
-<!--    <ul>
-        {% for object in object_list %}
-            <li>
-             {{object.name}}
-            </li>
-        {% endfor %}
-    </ul>
-    {{object_list}} -->
+
+<div class='row title-row my-5'>
+  <div class='col-12 py-0'>
+    <h3 class='my-0 py-0'>{{ count }} результатов для <b>{{ query }}</b></h3>
+  </div>
 </div>
 
+{% for object in object_list %}
+    {% with object|class_name as klass %}
+      {% if klass == 'Post' %}
+           <div class='row my-3'>
+             <div class='col-12'>
+                Запись блога: <a href='{{ object.get_absolute_url }}'> {{ object.title }}</a>
+            </div>
+          </div>
+
+      {% elif klass == 'Athlet' %}
+           <div class='row my-3'>
+             <div class='col-12'>
+                Атлет: <a href='{{ object.get_absolute_url }}'> {{ object.name }} {{object.surname}}</a>
+              </div>
+            </div>
+
+      {% elif klass == 'Article' %}
+           <div class='row my-3'>
+                <div class='col-12'>
+                   Статья: <a href='{{ object.get_absolute_url }}'> {{ object.title }}</a>
+                </div>
+            </div>
+      {% else %}
+           <div class='row my-3'>
+             <div class='col-12 col-lg-8 offset-lg-4'>
+                <a href='{{ object.get_absolute_url }}'> {{ object }} | {{ object|class_name }}</a>
+            </div>
+           </div>
+        {% endif %}
+
+    {% endwith %}
+
+{% endfor %}
 {% endblock %}

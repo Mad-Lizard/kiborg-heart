@@ -4,7 +4,18 @@ from django.utils import timezone
 from django_countries.fields import CountryField
 from embed_video.fields import EmbedVideoField
 from sorl.thumbnail import ImageField
+from django.db.models import Q
 
+class PostableMixinManager(models.Manager):
+    def search(self, query=None):
+        qs = self.get_queryset()
+        if query is not None:
+            or_lookup = (Q(title__icontains=query) |
+                         Q(description__icontains=query)|
+                         Q(text__icontains=query)
+                         )
+            qs = qs.filter(or_lookup).distinct()
+        return qs
 
 class PostableMixin(models.Model):
     class Meta:
@@ -19,6 +30,8 @@ class PostableMixin(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     published_at = models.DateTimeField(blank=True, null=True)
 
+    objects = PostableMixinManager()
+
     def publish(self):
         self.published_at = timezone.now()
         self.save()
@@ -32,6 +45,21 @@ class Article(PostableMixin):
 
 class Post(PostableMixin):
     mood = models.CharField(max_length=500, blank=True, null=True)
+
+class AthletManager(models.Manager):
+    def search(self, query=None):
+        qs = self.get_queryset()
+        if query is not None:
+            or_lookup = (Q(name__icontains=query) |
+                         Q(surname__icontains=query) |
+                         Q(sport__icontains=query) |
+                         Q(country__icontains=query) |
+                         Q(diagnosis__icontains=query) |
+                         Q(surgery__icontains=query) |
+                         Q(description__icontains=query)
+                         )
+            qs = qs.filter(or_lookup).distinct()
+        return qs
 
 class Athlet(models.Model):
     name = models.CharField(max_length=350)
@@ -51,6 +79,8 @@ class Athlet(models.Model):
     text = models.TextField(blank=True, null=True)
     video = EmbedVideoField(blank=True)
     published_at = models.DateTimeField(blank=True, null=True)
+
+    objects = AthletManager()
 
     def __str__(self):
         return self.name + ' ' + self.surname
