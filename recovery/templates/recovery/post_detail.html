@@ -13,7 +13,7 @@
       {% if post.image %}
         <img class="w-25 float-left mr-3" src="{{post.image.url}}">
       {% endif %}
-        <p>{{ post.text|linebreaksbr }}</p>
+        <p>{{ post.text | safe }}</p>
     </div>
 </div>
 

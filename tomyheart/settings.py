@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'embed_video',
     'django_mysql',
     'sorl.thumbnail',
+    'django_summernote',
     'recovery',
 ]
 

@@ -2,8 +2,6 @@
 {% load embed_video_tags %}
 {% block content %}
 <div class="row">
-  <div class="media">
-    {{context}}
     <img class="w-50 img-fluid img-thumbnail" src="{{athlet.image.url}}">
       <table class="w-50 table float-right">
         <thead>
@@ -55,11 +53,10 @@
             </tr>
           </tbody>
       </table>
-    </div>
   </div>
   <br>
   <div class="row">
-    <p>{{athlet.text|linebreaksbr}}</p>
+    <p>{{athlet.text|safe}}</p>
   </div>
   <div class="row justify-content-center mb-4">
     {% video athlet.video 'medium' %}

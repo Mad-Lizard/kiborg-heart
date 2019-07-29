@@ -25,7 +25,7 @@ class PostableMixin(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     text = models.TextField()
-    image = ImageField(upload_to='images/', null=True, blank=True)
+    image = ImageField(upload_to='images/', default='images/default.jpg', blank=True)
     video = EmbedVideoField(blank=True, null=True)
     created_at = models.DateTimeField(default=timezone.now)
     published_at = models.DateTimeField(blank=True, null=True)
@@ -64,7 +64,7 @@ class AthletManager(models.Manager):
 class Athlet(models.Model):
     name = models.CharField(max_length=350)
     surname = models.CharField(max_length=350)
-    image = ImageField(upload_to='images/')
+    image = ImageField(upload_to='images/', default='images/default.jpg')
     web_site = models.CharField(max_length=500, blank=True)
     web_site_name = models.CharField(max_length=150, blank=True)
     e_mail = models.EmailField(max_length=254, blank=True)

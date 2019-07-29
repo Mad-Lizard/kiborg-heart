@@ -5,13 +5,11 @@
   {% for athlet in athlets %}
     <div class="row mb-3">
       {% if athlet.image %}
+      <a href="{% url 'athlet_detail' pk=athlet.pk %}">
         {% thumbnail athlet.image "200x200" crop="center" as im %}
             <img class="mr-3" src="{{im.url}}" width="{{im.width}}" height="{{im.height}}">
         {% endthumbnail %}
-      {% else %}
-        {% thumbnail "https://picsum.photos/id/104/200" "200x200" crop="center" as im %}
-          <img class="mr-3" src="{{im.url}}" width="{{im.width}}" height="{{im.height}}">
-        {% endthumbnail %}
+      </a>
       {% endif %}
         <table class="w-75 table-borderless text-top float-right">
           <thead>
@@ -28,7 +26,7 @@
             <tbody>
               <tr>
                 <td>
-                  {{athlet.description}}
+                  {{athlet.description | safe}}
                   <a href="{% url 'athlet_detail' pk=athlet.pk %}">
                     <br>
                     Узнать историю ->
