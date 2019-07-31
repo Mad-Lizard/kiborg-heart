@@ -1,7 +1,6 @@
 from .models import Post, Athlet, Article
 from django.utils import timezone
-from django.views import generic, View
-from django.shortcuts import render
+from django.views import generic
 from itertools import chain
 # Create your views here.
 

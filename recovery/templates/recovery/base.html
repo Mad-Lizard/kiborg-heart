@@ -2,26 +2,30 @@
 {% load thumbnail %}
 <html>
     <head>
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4/3/1/css/bootstrap-theme.min.css">
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="{% static 'js/bootstrap.bundle.js' %}" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
       <link href="https://fonts.googleapis.com/css?family=Noto+Sans&subset=latin,cyrillic" rel="stylesheet" type="text/css">
       <link rel="stylesheet" href="{% static 'css/recovery.css' %}">
+
         <title>To My Heart</title>
     </head>
     <body>
 
-          <nav class="navbar d-flex navbar-expand-lg bg-light justify-content-between">
-            <div class="collapse navbar-collapse">
+          <nav class="navbar navbar-light navbar-expand-lg bg-light justify-content-between">
+            <!-- Navbar brand -->
+            <a class="nav-link" href="{% url 'about' %}">
+              {% thumbnail "https://picsum.photos/id/137/4752/3168" "40x40" crop="center" as im %}
+                  <img class="align-bottom d-inline-block" src="{{im.url}}" width="{{im.width}}" height="{{im.height}}">
+              {% endthumbnail %}
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <h1>
-                    <a class="nav-link" href="{% url 'about' %}">
-                      {% thumbnail "https://picsum.photos/id/137/4752/3168" "40x40" crop="center" as im %}
-                          <img class="align-bottom d-inline-block" src="{{im.url}}" width="{{im.url.width}}" height="{{im.url.height}}">
-                      {% endthumbnail %}
-                    </a>
-                  </h1>
-                </li>
+
                 <li class="nav-item active">
                   <h1><a class="nav-link" href="{% url 'post_list' %}">Блог <span class="sr-only"></span></a></h1>
                 </li>
