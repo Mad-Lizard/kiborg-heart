@@ -3,8 +3,12 @@ html {
     padding:0px;
 }
 
-.nav-link {
-    color: #ff9400;
+.navbar-custom .navbar-nav .nav-link {
+    color: #FCA205;
+}
+
+.navbar-custom .nav-item:hover .nav-link {
+    color: #16168a;
 }
 
 h1, h2, h3, h4 {

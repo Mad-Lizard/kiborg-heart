@@ -12,7 +12,7 @@
     </head>
     <body>
 
-          <nav class="navbar navbar-light navbar-expand-lg bg-light justify-content-between">
+          <nav class="navbar navbar-light navbar-expand-lg bg-light navbar-custom justify-content-between">
             <!-- Navbar brand -->
             <a class="nav-link" href="{% url 'about' %}">
               {% thumbnail "https://picsum.photos/id/137/4752/3168" "40x40" crop="center" as im %}
@@ -27,13 +27,13 @@
               <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item active">
-                  <h1><a class="nav-link" href="{% url 'post_list' %}">Блог <span class="sr-only"></span></a></h1>
+                  <h2><a class="nav-link" href="{% url 'post_list' %}">Блог <span class="sr-only"></span></a></h2>
                 </li>
                 <li class="nav-item">
-                  <h1><a class="nav-link" href="{% url 'athlet_list' %}">Атлеты</a></h1>
+                  <h2><a class="nav-link" href="{% url 'athlet_list' %}">Атлеты</a></h2>
                 </li>
                 <li class="nav-item">
-                <h1>  <a class="nav-link" href="{% url 'article_list' %}">Статьи</a></h1>
+                <h2>  <a class="nav-link" href="{% url 'article_list' %}">Статьи</a></h2>
                 </li>
             </ul>
               <form action="{% url 'search_results' %}" method="get" class="form-inline my-2 my-lg-0">
