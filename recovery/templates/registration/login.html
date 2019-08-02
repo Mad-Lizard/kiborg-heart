@@ -1,0 +1,32 @@
+{% extends 'recovery/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+  Вход на сайт
+{% endblock %}
+
+{% block content %}
+
+<h2>Вход на сайт</h2>
+<form method="post" class="form-group">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-outline-primary">Войти</button>
+</form>
+<div class="my-2">
+  <h3>
+    Вход через социальные сети:
+  </h3>
+</div>
+<div class="my-2">
+<a href="{% url 'social:begin' 'github' %}" class="title mr-2">
+  <img src="{% static 'images/github.png' %}" width="40" height="40">
+</a>
+<a href="{% url 'social:begin' 'facebook' %}" class="mr-2">
+  <img src="{% static 'images/facebook.jpg' %}" width="40" height="40">
+</a>
+<a href="{% url 'social:begin' 'twitter' %}" class="mr-2">
+  <img src="{% static 'images/twitter.png' %}" width="40" height="40">
+</a>
+</div>
+{% endblock %}
