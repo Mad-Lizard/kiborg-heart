@@ -1,10 +1,6 @@
 {% extends 'recovery/base.html' %}
 {% load staticfiles %}
 
-{% block title %}
-  Вход на сайт
-{% endblock %}
-
 {% block content %}
 
 <h2>Вход на сайт</h2>
@@ -22,18 +18,21 @@
 <a href="{% url 'social:begin' 'github' %}" class="title mr-2">
   <img src="{% static 'images/github.png' %}" width="40" height="40">
 </a>
-<a href="{% url 'social:begin' 'facebook' %}" class="mr-2">
+<a href="{% url 'social:begin' 'facebook' %}" class="title mr-2">
   <img src="{% static 'images/facebook.jpg' %}" width="40" height="40">
 </a>
-<a href="{% url 'social:begin' 'twitter' %}" class="mr-2">
+<a href="{% url 'social:begin' 'twitter' %}" class="title mr-2">
+  <img src="{% static 'images/twitter.png' %}" width="40" height="40">
+</a>
+<a href="{% url 'social:begin' 'instagram' %}" class="title mr-2">
   <img src="{% static 'images/twitter.png' %}" width="40" height="40">
 </a>
 </div>
+
 <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-Login
+    Login
 </fb:login-button>
 
 <div id="status">
 </div>
-
 {% endblock %}
