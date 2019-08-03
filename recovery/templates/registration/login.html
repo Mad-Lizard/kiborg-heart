@@ -29,4 +29,11 @@
   <img src="{% static 'images/twitter.png' %}" width="40" height="40">
 </a>
 </div>
+<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+Login
+</fb:login-button>
+
+<div id="status">
+</div>
+
 {% endblock %}

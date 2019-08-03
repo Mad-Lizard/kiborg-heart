@@ -7,3 +7,4 @@ db.sqlite3
 .DS_Store
 /tomyheart/settings.py
 /recovery/static
+/media
