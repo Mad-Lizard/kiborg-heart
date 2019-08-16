@@ -1,4 +1,4 @@
-from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
 from django_countries.fields import CountryField
@@ -22,29 +22,38 @@ class PostableMixin(models.Model):
         abstract=True
         ordering = ['published_at']
 
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    text = models.TextField()
-    image = ImageField(upload_to='images/', default='images/default.jpg', blank=True)
-    video = EmbedVideoField(blank=True, null=True)
+    title = models.CharField('заголовок', max_length=200)
+    description = models.TextField('описание')
+    text = models.TextField('текст')
+    image = ImageField('изображение', upload_to='images/', default='images/default.jpg', blank=True)
+    image_name = models.CharField('подпись к изображению', max_length=100, default='', blank=True)
+    video = EmbedVideoField('ссылка на видео', blank=True, null=True)
+    created_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=timezone.now)
-    published_at = models.DateTimeField(blank=True, null=True)
+    published_at = models.DateTimeField('публиковать', blank=True, null=True)
 
     objects = PostableMixinManager()
 
+    @property
     def publish(self):
-        self.published_at = timezone.now()
-        self.save()
+        if self.published_at == True:
+            self.published_at = timezone.now()
+        else:
+            self.published_at = null
+        return self.published_at
+
 
     def __str__(self):
         return self.title
 
+
 class Article(PostableMixin):
-    link = models.CharField(max_length=500, blank=True)
-    link_name = models.CharField(max_length=150, blank=True)
+    link = models.CharField('ссылка на первоисточник', max_length=500, blank=True)
+    link_name = models.CharField('название ссылки', max_length=150, blank=True)
 
 class Post(PostableMixin):
-    mood = models.CharField(max_length=500, blank=True, null=True)
+    is_visible = models.BooleanField('открытый доступ', default=False)
+
 
 class AthletManager(models.Manager):
     def search(self, query=None):
@@ -62,23 +71,23 @@ class AthletManager(models.Manager):
         return qs
 
 class Athlet(models.Model):
-    name = models.CharField(max_length=350)
-    surname = models.CharField(max_length=350)
-    image = ImageField(upload_to='images/', default='images/default.jpg')
-    web_site = models.CharField(max_length=500, blank=True)
-    web_site_name = models.CharField(max_length=150, blank=True)
-    e_mail = models.EmailField(max_length=254, blank=True)
-    date_of_birth = models.IntegerField(blank=True, null=True)
-    date_of_dearth = models.IntegerField(blank=True, null=True)
-    country = CountryField(blank=True, null=True)
-    sport = models.CharField(max_length=500)
-    diagnosis = models.CharField(max_length=500)
-    surgery = models.CharField(max_length=500, blank=True)
-    date_of_surgery = models.CharField(max_length=250, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    text = models.TextField(blank=True, null=True)
-    video = EmbedVideoField(blank=True)
-    published_at = models.DateTimeField(blank=True, null=True)
+    name = models.CharField('имя', max_length=350)
+    surname = models.CharField('фамилия', max_length=350)
+    image = ImageField('изображение', upload_to='images/', default='images/default.jpg')
+    web_site = models.CharField('ссылка на сайт', max_length=500, blank=True)
+    web_site_name = models.CharField('название сайта', max_length=150, blank=True)
+    e_mail = models.EmailField('email', max_length=254, blank=True)
+    date_of_birth = models.IntegerField('дата рождения', blank=True, null=True)
+    date_of_dearth = models.IntegerField('дата смерти', blank=True, null=True)
+    country = CountryField('страна', blank=True, null=True)
+    sport = models.CharField('вид активности', max_length=500)
+    diagnosis = models.CharField('диагноз', max_length=500)
+    surgery = models.CharField('выполненная операция', max_length=500, blank=True)
+    date_of_surgery = models.CharField('дата проведения операции', max_length=250, blank=True, null=True)
+    description = models.TextField('описание', blank=True, null=True)
+    text = models.TextField('текст', blank=True, null=True)
+    video = EmbedVideoField('ссылка на видео', blank=True)
+    published_at = models.DateTimeField('публиковать', blank=True, null=True)
 
     objects = AthletManager()
 

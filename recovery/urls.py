@@ -10,4 +10,5 @@ urlpatterns = [
     path('articles', views.ArticleListView.as_view(), name='article_list'),
     path('article/<int:pk>/', views.ArticleDetailView.as_view(), name='article_detail'),
     path('search/', views.SearchResultsView.as_view(), name='search_results'),
+    path('add_post/', views.AddPostView.as_view(), name='add_post'),
 ]

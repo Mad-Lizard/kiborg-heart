@@ -1,0 +1,15 @@
+{% extends 'recovery/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<form method="POST" class="post-form">{% csrf_token %}
+    <div class="form-group">
+        {{ form|crispy }}
+        <button id="save" type="submit" class="btn btn-secondary">Сохранить</button>
+        <button id="publish" type="submit" class="btn btn-primary">Опубликовать</button>
+    </div>
+</form>
+
+{% endblock %}

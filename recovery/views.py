@@ -1,8 +1,12 @@
 from .models import Post, Athlet, Article
+from .forms import PostCreationForm
 from django.utils import timezone
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect, render
 from django.views import generic
 from itertools import chain
-# Create your views here.
+from django.urls import reverse
+#from django.contrib.auth.mixins import LoginRequireMixin TODO
 
 class PostListView(generic.ListView):
     model = Post
@@ -65,3 +69,39 @@ class SearchResultsView(generic.ListView):
             self.count = len(qs) # since qs is actually a list
             return qs
         return Post.objects.none()
+
+class AddPostView(generic.edit.CreateView):
+    model = Post
+    form_class = PostCreationForm
+    template_name = 'recovery/add_post.html'
+
+    def get_success_url(self, pk):
+        return reverse('post_detail', kwargs={'pk': pk})
+
+    def get(self, request, *args, **kwargs):
+        self.object = None
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        return render(request, 'recovery/add_post.html', {'form':form})
+
+    def post(self, request, *args, **kwargs):
+        self.object = None
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.created_by = self.request.user
+        self.object.created_at = timezone.now()
+        #post.published_at = post.publish()
+        self.object.save()
+        pk = self.object.pk
+        return HttpResponseRedirect(self.get_success_url(pk))
+
+    def form_invalid(self, form):
+        return redirect(
+            self.get_context_data(form = form))

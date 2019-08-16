@@ -9,7 +9,7 @@
         {% if article.image %}
           <a href="{% url 'article_detail' pk=article.pk %}">
             {% thumbnail article.image '200x200' crop='center' as im %}
-              <img class="mr-3" src="{{im.url}}" width="{{im.width}}" height="{{im.height}}">
+              <img class="mr-3" src="{{im.url}}" width="200" height="200">
             {% endthumbnail %}
           </a>
         {% endif %}
