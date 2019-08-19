@@ -4,11 +4,29 @@
 
 {% block content %}
 
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
+        {% if message.tags == 'error' %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
 <form method="POST" class="post-form">{% csrf_token %}
     <div class="form-group">
         {{ form|crispy }}
-        <button id="save" type="submit" class="btn btn-secondary">Сохранить</button>
-        <button id="publish" type="submit" class="btn btn-primary">Опубликовать</button>
+
+        <button id="save" type="submit" class="btn btn-secondary" value="save">
+            Сохранить
+        </button>
+
     </div>
 </form>
 

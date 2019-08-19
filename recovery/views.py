@@ -2,10 +2,12 @@ from .models import Post, Athlet, Article
 from .forms import PostCreationForm
 from django.utils import timezone
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render
+from django.shortcuts import render, render_to_response
+from django.db import IntegrityError
 from django.views import generic
 from itertools import chain
 from django.urls import reverse
+from django.contrib import messages
 #from django.contrib.auth.mixins import LoginRequireMixin TODO
 
 class PostListView(generic.ListView):
@@ -53,9 +55,9 @@ class SearchResultsView(generic.ListView):
         query = request.GET.get('q', None)
 
         if query is not None:
-            post_results        = Post.objects.search(query)
-            article_results      = Article.objects.search(query)
-            athlet_results     = Athlet.objects.search(query)
+            post_results = Post.objects.search(query)
+            article_results = Article.objects.search(query)
+            athlet_results = Athlet.objects.search(query)
 
             # combine querysets
             queryset_chain = chain(
@@ -88,8 +90,12 @@ class AddPostView(generic.edit.CreateView):
         self.object = None
         form_class = self.get_form_class()
         form = self.get_form(form_class)
-        if form.is_valid():
+        try:
+            form.is_valid()
             return self.form_valid(form)
+        except IntegrityError as e:
+            messages.error(self.request, 'Не уникальный заголовок записи.')
+            return render(self.request, 'recovery/add_post.html', {'form':form,})
         else:
             return self.form_invalid(form)
 
@@ -97,11 +103,21 @@ class AddPostView(generic.edit.CreateView):
         self.object = form.save(commit=False)
         self.object.created_by = self.request.user
         self.object.created_at = timezone.now()
-        #post.published_at = post.publish()
-        self.object.save()
-        pk = self.object.pk
-        return HttpResponseRedirect(self.get_success_url(pk))
+        if self.object.is_visible:
+            self.object.is_visible = 1
+        if self.object.is_published == True:
+            self.object.published_at = timezone.now()
+            self.object.save()
+            pk = self.object.pk
+            messages.success(self.request, 'Запись опубликована')
+            return HttpResponseRedirect(self.get_success_url(pk))
+        else:
+            self.object.save()
+            messages.success(self.request, 'Запись сохранена')
+            return render(self.request, 'recovery/add_post.html', {'form':form})
 
     def form_invalid(self, form):
-        return redirect(
-            self.get_context_data(form = form))
+        messages.error(self.request, 'Не удалось сохранить запись')
+        return render(self.request, 'recovery/add_post.html', {'form':form})
+
+

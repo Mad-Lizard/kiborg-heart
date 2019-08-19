@@ -24,5 +24,4 @@ class PostCreationForm(ModelForm):
                 attrs={
                     'placeholder': 'Введите статью',
                     }),
-
             }

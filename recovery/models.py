@@ -21,16 +21,21 @@ class PostableMixin(models.Model):
     class Meta:
         abstract=True
         ordering = ['published_at']
+        constraints = [
+            models.UniqueConstraint(fields=['title', 'created_by'], name = 'уникальная запись')
+            ]
 
-    title = models.CharField('заголовок', max_length=200)
-    description = models.TextField('описание')
+
+    title = models.CharField('заголовок', max_length=100, blank=False, null=False)
+    description = models.TextField('описание', max_length=1000)
     text = models.TextField('текст')
     image = ImageField('изображение', upload_to='images/', default='images/default.jpg', blank=True)
     image_name = models.CharField('подпись к изображению', max_length=100, default='', blank=True)
     video = EmbedVideoField('ссылка на видео', blank=True, null=True)
     created_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=timezone.now)
-    published_at = models.DateTimeField('публиковать', blank=True, null=True)
+    is_published = models.BooleanField('публиковать', default=False)
+    published_at = models.DateTimeField(blank=True, null=True)
 
     objects = PostableMixinManager()
 
@@ -39,7 +44,7 @@ class PostableMixin(models.Model):
         if self.published_at == True:
             self.published_at = timezone.now()
         else:
-            self.published_at = null
+            self.published_at = ''
         return self.published_at
 
 
