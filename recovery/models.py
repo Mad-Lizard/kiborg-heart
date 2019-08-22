@@ -29,7 +29,7 @@ class PostableMixin(models.Model):
     title = models.CharField('заголовок', max_length=100, blank=False, null=False)
     description = models.TextField('описание', max_length=1000)
     text = models.TextField('текст')
-    image = ImageField('изображение', upload_to='images/', default='images/default.jpg', blank=True)
+    image = models.ImageField('изображение', upload_to='images/', default='images/default.jpg', blank=True)
     image_name = models.CharField('подпись к изображению', max_length=100, default='', blank=True)
     video = EmbedVideoField('ссылка на видео', blank=True, null=True)
     created_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)

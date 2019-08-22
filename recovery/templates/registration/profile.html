@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Профиль</h2>
+
+<table class="table table-striped">
+    <tbody>
+        <thead>
+            <tr>
+                <th colspan="2" class="table-secondary text-center">
+                {{user.username}}
+                </th>
+            </tr>
+        </thead>
+        <tr>
+            <th scope="row">Имя:</th>
+            <td>{{user.first_name}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Фамилия:</th>
+            <td>{{user.last_name}}</td>
+        </tr>
+        <tr>
+            <th scope="row">E-mail:</th>
+            <td>{{user.email}}</td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}

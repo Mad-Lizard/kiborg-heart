@@ -20,13 +20,14 @@
 {% endif %}
 
 {% block title %}
-    Добавление записи
+    Редактирование записи
 {% endblock %}
-<form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
+
+<form method="POST" enctype="multipart/form-data" class="post-form">{% csrf_token %}
     <div class="form-group">
         {{ form|crispy }}
 
-        <button id="save" type="submit" class="btn btn-secondary">
+        <button id="save" type="submit" class="btn btn-secondary" value="save">
             Сохранить
         </button>
 
