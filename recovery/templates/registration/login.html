@@ -21,18 +21,9 @@
 <a href="{% url 'social:begin' 'facebook' %}" class="title mr-2">
   <img src="{% static 'images/facebook.jpg' %}" width="40" height="40">
 </a>
-<a href="{% url 'social:begin' 'twitter' %}" class="title mr-2">
-  <img src="{% static 'images/twitter.png' %}" width="40" height="40">
-</a>
-<a href="{% url 'social:begin' 'instagram' %}" class="title mr-2">
-  <img src="{% static 'images/twitter.png' %}" width="40" height="40">
+<a href="{% url 'social:begin' 'google-oauth2' %}" class="title mr-2">
+  <img src="{% static 'images/199925.PNG' %}" width="40" height="40">
 </a>
 </div>
 
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-    Login
-</fb:login-button>
-
-<div id="status">
-</div>
 {% endblock %}

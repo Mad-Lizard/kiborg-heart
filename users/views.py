@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm
+from .forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.views import generic
@@ -13,4 +13,3 @@ class Profile(generic.DetailView):
     model = User
     template_name = 'registration/profile.html'
    # pk = self.request.user.pk
-

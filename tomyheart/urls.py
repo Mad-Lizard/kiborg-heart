@@ -8,9 +8,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('recovery.urls')),
     path('summernote/', include('django_summernote.urls')),
-    path('accounts/', include('accounts.url')),
+    path('users/', include('users.urls')),
     path('oauth/', include('social_django.urls', namespace='social')),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('users/', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:

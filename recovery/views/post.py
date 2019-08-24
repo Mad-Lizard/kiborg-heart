@@ -6,7 +6,7 @@ class PostListView(generic.ListView):
     model = Post
     paginate_by = 10
     context_object_name = 'posts'
-    queryset = Post.objects.filter(published_at__lte=timezone.now())
+    queryset = Post.objects.filter(published_at__lte=timezone.now(), is_published=True)
 
     class Meta:
         app_label = 'recovery'
