@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 
 {% block content %}
 
 <h2>Профиль</h2>
-
+<div class="row mb-3">
 <table class="table table-striped">
     <tbody>
         <thead>
@@ -27,5 +28,42 @@
         </tr>
     </tbody>
 </table>
+</div>
+    {% for user_post in user_posts %}
+  <div class="row mb-3">
+    <div class="w-25">
+      {% if user_post.image %}
+        <a href="{% url 'update_post' pk=user_post.pk %}">
+          {% thumbnail user_post.image "200x200" crop="center" as im %}
+            <img class="mr-3 list" src="{{im.url}}" width="200" height="200">
+          {% endthumbnail %}
+        </a>
+      {% endif %}
+    </div>
+    <table class="w-75 table-borderless table float-right">
+      <thead>
+        <tr>
+          <th scope="col" class="table-light">
+            <h1>
+            <a class="title" href="{% url 'update_post' pk=user_post.pk %}">
+              {{user_post.title}}
+            </a>
+            </h1>
+          </th>
+        </tr>
+      </thead>
+        <tbody>
+          <tr>
+            <td>
+              {{user_post.description | safe }}
+              <a href="{% url 'update_post' pk=user_post.pk %}">
+                </br>Узнать историю ->
+              </a>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+    </div>
+    {% endfor %}
 
 {% endblock %}

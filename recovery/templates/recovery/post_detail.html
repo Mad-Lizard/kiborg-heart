@@ -10,6 +10,11 @@
             {{ post.published_at }}
         </div>
       {% endif %}
+      {% if post.created_by %}
+        <div class="date mb-3">
+            Автор: {{ post.created_by }}
+        </div>
+      {% endif %}
       {% if post.image %}
         <img class="w-25 float-left mr-3" src="{{post.image.url}}">
       {% endif %}
