@@ -10,6 +10,8 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 class AddPostView(LoginRequiredMixin, generic.edit.CreateView):
+    login_url = '/users/login/'
+    redirect_field_name = '/'
     model = Post
     form_class = PostCreationForm
     template_name = 'recovery/add_post.html'
@@ -21,7 +23,7 @@ class AddPostView(LoginRequiredMixin, generic.edit.CreateView):
         return reverse('post_detail', kwargs={'pk': pk})
 
     def get_success_save_url(self, pk):
-        return reverse('update_post', kwargs={'pk': pk})
+        return reverse('profile', kwargs={'pk': pk})
 
     def get(self, request, *args, **kwargs):
         self.object = None
@@ -59,7 +61,7 @@ class AddPostView(LoginRequiredMixin, generic.edit.CreateView):
             return HttpResponseRedirect(self.get_success_publish_url(pk))
         else:
             self.object.save()
-            pk = self.object.pk
+            pk = self.request.user.pk
             messages.success(self.request, 'Запись сохранена')
             return HttpResponseRedirect(self.get_success_save_url(pk))
 

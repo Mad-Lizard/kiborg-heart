@@ -8,19 +8,20 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 class UpdatePostView(LoginRequiredMixin, generic.UpdateView):
+    class Meta:
+        app_label = 'recovery'
+
+    login_url = '/users/login/'
+    redirect_field_name = '/'
     model = Post
     form_class = PostCreationForm
     template_name = 'recovery/update_post.html'
     slug_url_kwarg = 'pk'
     context_object_name = 'post'
 
-    class Meta:
-        app_label = 'recovery'
-
-
     def form_valid(self, form):
         post = form.save(commit=False)
-        post.created_by = self.request.user
+       # post.created_by = self.request.user
         pk = post.pk
         db_post = self.model.objects.get(pk=pk)
         if self.request.FILES:

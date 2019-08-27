@@ -29,6 +29,22 @@
     </tbody>
 </table>
 </div>
+<form method="GET">
+    {% csrf_token %}
+    <button type="submit" formaction="{% url 'add_post' %}" class="btn btn-success float-right">
+        Добавить новую запись
+    </button>
+</form>
+<h2>Список записей пользователя:</h2>
+    {% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
     {% for user_post in user_posts %}
   <div class="row mb-3">
     <div class="w-25">
@@ -57,13 +73,29 @@
             <td>
               {{user_post.description | safe }}
               <a href="{% url 'update_post' pk=user_post.pk %}">
-                </br>Узнать историю ->
+                </br>Редактировать ->
               </a>
             </td>
           </tr>
+          <tr>
+              <td>
+                  <form method="POST">
+                      {% csrf_token %}
+                         <button type="submit" formaction="{% url 'delete_post' pk=user_post.pk %}" class="btn btn-danger confirm-delete">
+                            Удалить
+                         </button>
+                  </form>
+              </td>
+          </tr>
         </tbody>
     </table>
-    </div>
+  </div>
     {% endfor %}
+
+<script>
+$(document).on('click', '.confirm-delete', function(){
+    return confirm('Вы уверны, что хотите удалить эту запись?');
+})
+</script>
 
 {% endblock %}

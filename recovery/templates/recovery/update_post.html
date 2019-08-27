@@ -19,9 +19,9 @@
     {% endfor %}
 {% endif %}
 
-{% block title %}
+<h2>
     Редактирование записи
-{% endblock %}
+</h2>
 
 <form method="POST" enctype="multipart/form-data" class="post-form">{% csrf_token %}
     <div class="form-group">
@@ -31,7 +31,18 @@
             Сохранить
         </button>
 
+
+        <button type="submit" formaction="{% url 'delete_post' pk=post.pk %}" class="confirm-delete btn btn-danger" >
+            Удалить
+        </button>
+
+
     </div>
 </form>
 
 {% endblock %}
+<script>
+$(document).on('click', '.confirm-delete', function(){
+    return confirm('Вы уверны, что хотите удалить эту запись?');
+})
+</script>

@@ -19,9 +19,9 @@
     {% endfor %}
 {% endif %}
 
-{% block title %}
+<h2>
     Добавление записи
-{% endblock %}
+</h2>
 <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
     <div class="form-group">
         {{ form|crispy }}
